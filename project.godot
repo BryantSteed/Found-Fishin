@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="Found Fishin"
 run/main_scene="uid://cll2wes8iyms1"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 

@@ -1,24 +1,6 @@
 [gd_scene format=3 uid="uid://cll2wes8iyms1"]
 
-[ext_resource type="PackedScene" uid="uid://teoh1sfpx7o" path="res://hook/hook.tscn" id="1_wjap7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_82bq7"]
-size = Vector2(792, 28)
+[ext_resource type="Script" uid="uid://ddeiiloftpsho" path="res://water/water.gd" id="1_wjap7"]
 
 [node name="Water" type="Node2D" unique_id=1524918432]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1393529281]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=321953098]
-position = Vector2(403, 626)
-shape = SubResource("RectangleShape2D_82bq7")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=460102934]
-offset_left = -4.0
-offset_top = 608.0
-offset_right = 790.0
-offset_bottom = 639.0
-metadata/_edit_group_ = true
-
-[node name="Hook" parent="." unique_id=584030165 instance=ExtResource("1_wjap7")]
-position = Vector2(384, 53)
+script = ExtResource("1_wjap7")

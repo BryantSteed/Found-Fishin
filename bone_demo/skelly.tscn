@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://buqp10hf2p3hc"]
-
-[sub_resource type="Curve" id="Curve_iupvx"]
-
-[node name="Skelly" type="Line2D" unique_id=1502292054]
-points = PackedVector2Array(0, 0, 20, 30, 30, 50)
-width_curve = SubResource("Curve_iupvx")
