@@ -1,6 +1,60 @@
 [gd_scene format=3 uid="uid://cll2wes8iyms1"]
 
 [ext_resource type="Script" uid="uid://ddeiiloftpsho" path="res://water/water.gd" id="1_wjap7"]
+[ext_resource type="PackedScene" uid="uid://teoh1sfpx7o" path="res://hook/hook.tscn" id="2_hook"]
+[ext_resource type="Script" path="res://water/fishing_line.gd" id="3_line"]
 
-[node name="Water" type="Node2D" unique_id=1524918432]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
+size = Vector2(4000, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bed"]
+size = Vector2(4000, 40)
+
+[node name="Water" type="Node2D" node_paths=PackedStringArray("hook")]
 script = ExtResource("1_wjap7")
+hook = NodePath("Hook")
+
+[node name="WaterArea" type="Area2D" parent="."]
+position = Vector2(576, 400)
+gravity_space_override = 3
+gravity = 150.0
+linear_damp_space_override = 1
+linear_damp = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterArea"]
+shape = SubResource("RectangleShape2D_water")
+
+[node name="ColorRect" type="ColorRect" parent="WaterArea"]
+offset_left = -2000.0
+offset_top = -250.0
+offset_right = 2000.0
+offset_bottom = 250.0
+color = Color(0.12, 0.35, 0.6, 1)
+
+[node name="LakeBed" type="StaticBody2D" parent="."]
+position = Vector2(576, 640)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LakeBed"]
+shape = SubResource("RectangleShape2D_bed")
+
+[node name="ColorRect" type="ColorRect" parent="LakeBed"]
+offset_left = -2000.0
+offset_top = -20.0
+offset_right = 2000.0
+offset_bottom = 400.0
+color = Color(0.36, 0.28, 0.18, 1)
+
+[node name="Hook" parent="." instance=ExtResource("2_hook")]
+position = Vector2(576, 100)
+
+[node name="FishingLine" type="Line2D" parent="." node_paths=PackedStringArray("hook")]
+width = 2.0
+default_color = Color(0.95, 0.95, 0.95, 1)
+script = ExtResource("3_line")
+hook = NodePath("../Hook")
+
+[node name="HUD" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 800.0
+offset_bottom = 60.0

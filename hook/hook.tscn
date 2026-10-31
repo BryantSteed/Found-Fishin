@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://teoh1sfpx7o"]
 
+[ext_resource type="Script" uid="uid://dl24umdc51eum" path="res://hook/hook.gd" id="1_hook"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5aq51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5aq51"]
 
 [node name="Hook" type="RigidBody2D" unique_id=584030165]
 physics_material_override = SubResource("PhysicsMaterial_5aq51")
+script = ExtResource("1_hook")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=54416109]
 shape = SubResource("RectangleShape2D_5aq51")
