@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://teoh1sfpx7o"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5aq51"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5aq51"]
+
+[node name="Hook" type="RigidBody2D" unique_id=584030165]
+physics_material_override = SubResource("PhysicsMaterial_5aq51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=54416109]
+shape = SubResource("RectangleShape2D_5aq51")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1388607923]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(1, 0.043137256, 1, 1)
