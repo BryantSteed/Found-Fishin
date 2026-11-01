@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddeiiloftpsho" path="res://water/water.gd" id="1_wjap7"]
 [ext_resource type="PackedScene" uid="uid://teoh1sfpx7o" path="res://hook/hook.tscn" id="2_hook"]
-[ext_resource type="Script" path="res://water/fishing_line.gd" id="3_line"]
+[ext_resource type="Script" uid="uid://bger8ufu88q8l" path="res://water/fishing_line.gd" id="3_line"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
 size = Vector2(4000, 500)
@@ -10,50 +10,51 @@ size = Vector2(4000, 500)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bed"]
 size = Vector2(4000, 40)
 
-[node name="Water" type="Node2D" node_paths=PackedStringArray("hook")]
+[node name="Water" type="Node2D" unique_id=598419867 node_paths=PackedStringArray("hook")]
 script = ExtResource("1_wjap7")
 hook = NodePath("Hook")
 
-[node name="WaterArea" type="Area2D" parent="."]
+[node name="WaterArea" type="Area2D" parent="." unique_id=1921342090]
 position = Vector2(576, 400)
 gravity_space_override = 3
 gravity = 150.0
 linear_damp_space_override = 1
 linear_damp = 4.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterArea" unique_id=1435732314]
 shape = SubResource("RectangleShape2D_water")
 
-[node name="ColorRect" type="ColorRect" parent="WaterArea"]
+[node name="ColorRect" type="ColorRect" parent="WaterArea" unique_id=1579938083]
 offset_left = -2000.0
 offset_top = -250.0
 offset_right = 2000.0
 offset_bottom = 250.0
 color = Color(0.12, 0.35, 0.6, 1)
 
-[node name="LakeBed" type="StaticBody2D" parent="."]
+[node name="LakeBed" type="StaticBody2D" parent="." unique_id=1168152225]
 position = Vector2(576, 640)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LakeBed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LakeBed" unique_id=599439396]
 shape = SubResource("RectangleShape2D_bed")
 
-[node name="ColorRect" type="ColorRect" parent="LakeBed"]
+[node name="ColorRect" type="ColorRect" parent="LakeBed" unique_id=1239621994]
 offset_left = -2000.0
 offset_top = -20.0
 offset_right = 2000.0
 offset_bottom = 400.0
 color = Color(0.36, 0.28, 0.18, 1)
 
-[node name="Hook" parent="." instance=ExtResource("2_hook")]
+[node name="Hook" parent="." unique_id=1870218036 instance=ExtResource("2_hook")]
 position = Vector2(576, 100)
 
-[node name="FishingLine" type="Line2D" parent="." node_paths=PackedStringArray("hook")]
+[node name="FishingLine" type="Line2D" parent="." unique_id=1216610075 node_paths=PackedStringArray("hook", "water_area")]
 width = 2.0
 default_color = Color(0.95, 0.95, 0.95, 1)
 script = ExtResource("3_line")
 hook = NodePath("../Hook")
+water_area = NodePath("../WaterArea")
 
-[node name="HUD" type="Label" parent="."]
+[node name="HUD" type="Label" parent="." unique_id=1165417077]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 800.0

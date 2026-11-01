@@ -2,12 +2,14 @@ extends Node2D
 
 @export var hook: Hook
 @export var follow_speed := 10.0   # higher = anchor tracks the mouse more tightly
+@export var anchor_y := 0.0         # height the anchor slides along
+@export var throw_slack_amount := 25.0
 
 @onready var water_area: Area2D = $WaterArea
 @onready var hud: Label = $HUD
 
 func _ready() -> void:
-	hook.anchor = Vector2(hook.global_position.x, 0.0)
+	hook.anchor = Vector2(hook.global_position.x, anchor_y)
 	water_area.body_entered.connect(_on_water_body_changed.bind(true))
 	water_area.body_exited.connect(_on_water_body_changed.bind(false))
 
@@ -16,9 +18,9 @@ func _on_water_body_changed(body: Node2D, entered: bool) -> void:
 		body.in_water = entered
 
 func _physics_process(delta: float) -> void:
-	# Lateral only: the anchor slides along y = 0, smoothed so mouse flicks don't teleport it
-	var x := lerpf(hook.anchor.x, get_global_mouse_position().x, 1.0 - exp(-follow_speed * delta))
-	hook.anchor = Vector2(x, 0.0)
+	# Lateral only: the anchor slides along anchor_y, smoothed so mouse flicks don't teleport it
+	var anchor_x := lerpf(hook.anchor.x, get_global_mouse_position().x, 1.0 - exp(-follow_speed * delta))
+	hook.anchor = Vector2(anchor_x, anchor_y)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		hook.spool = Hook.Spool.FREE
@@ -36,4 +38,4 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed \
 			and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		hook.give_slack(25.0)
+		hook.give_slack(throw_slack_amount)
