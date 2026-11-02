@@ -14,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Lateral only: the anchor slides along anchor_y, smoothed so mouse flicks don't teleport it
 	var anchor_x := lerpf(hook.anchor.x, get_global_mouse_position().x, 1.0 - exp(-follow_speed * delta))
-	hook.anchor = Vector2(anchor_x, anchor_y)
+	hook.anchor = Vector2(anchor_x, get_global_mouse_position().y)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		hook.spool = Hook.Spool.FREE
