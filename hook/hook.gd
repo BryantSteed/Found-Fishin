@@ -8,14 +8,13 @@ enum Spool { LOCKED, REELING, FREE }
 @export var reel_speed := 150.0
 @export var line_stiffness := 60.0
 @export var line_damping := 8.0
-@export var water_drag := 0.02
+@export var drag_coefficient := 1.0   # how hard this shape is to drag through fluid
 @export var initial_line_length := 100.0
 
 var anchor := Vector2.ZERO
 var line_length := 0.0
 var spool := Spool.LOCKED
 var tension := 0.0   # 0 while slack
-var in_water := false
 
 func _ready() -> void:
 	line_length = initial_line_length
@@ -46,7 +45,3 @@ func _physics_process(delta: float) -> void:
 		var radial_velocity := linear_velocity.dot(dir_to_anchor)
 		tension = maxf(stretch * line_stiffness - radial_velocity * line_damping, 0.0)
 		apply_central_force(dir_to_anchor * tension * mass)
-
-	# Quadratic water drag on top of the water Area2D's linear damp
-	if in_water:
-		apply_central_force(-linear_velocity * linear_velocity.length() * water_drag * mass)

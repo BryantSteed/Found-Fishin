@@ -10,12 +10,6 @@ extends Node2D
 
 func _ready() -> void:
 	hook.anchor = Vector2(hook.global_position.x, anchor_y)
-	water_area.body_entered.connect(_on_water_body_changed.bind(true))
-	water_area.body_exited.connect(_on_water_body_changed.bind(false))
-
-func _on_water_body_changed(body: Node2D, entered: bool) -> void:
-	if body is Hook:
-		body.in_water = entered
 
 func _physics_process(delta: float) -> void:
 	# Lateral only: the anchor slides along anchor_y, smoothed so mouse flicks don't teleport it
@@ -32,7 +26,7 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	hud.text = "length %.0f   slack %.0f   tension %.0f   %s   %s\nLMB reel   RMB free spool   wheel down: throw slack" % [
 		hook.line_length, hook.slack(), hook.tension,
-		Hook.Spool.keys()[hook.spool], "in water" if hook.in_water else "in air",
+		Hook.Spool.keys()[hook.spool], "in water" if water_area.overlaps_body(hook) else "in air",
 	]
 
 func _unhandled_input(event: InputEvent) -> void:

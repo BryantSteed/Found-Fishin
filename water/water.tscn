@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://ddeiiloftpsho" path="res://water/water.gd" id="1_wjap7"]
 [ext_resource type="PackedScene" uid="uid://teoh1sfpx7o" path="res://hook/hook.tscn" id="2_hook"]
 [ext_resource type="Script" uid="uid://bger8ufu88q8l" path="res://water/fishing_line.gd" id="3_line"]
+[ext_resource type="Script" uid="uid://31dt1bop2k7m" path="res://water/water_area.gd" id="4_water_area"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
-size = Vector2(4000, 500)
+size = Vector2(4000, 649)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bed"]
 size = Vector2(4000, 40)
@@ -17,16 +18,16 @@ hook = NodePath("Hook")
 [node name="WaterArea" type="Area2D" parent="." unique_id=1921342090]
 position = Vector2(576, 400)
 gravity_space_override = 3
-gravity = 150.0
 linear_damp_space_override = 1
-linear_damp = 4.0
+script = ExtResource("4_water_area")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterArea" unique_id=1435732314]
+position = Vector2(0, -74.5)
 shape = SubResource("RectangleShape2D_water")
 
 [node name="ColorRect" type="ColorRect" parent="WaterArea" unique_id=1579938083]
 offset_left = -2000.0
-offset_top = -250.0
+offset_top = -396.0
 offset_right = 2000.0
 offset_bottom = 250.0
 color = Color(0.12, 0.35, 0.6, 1)
